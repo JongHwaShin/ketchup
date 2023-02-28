@@ -1,0 +1,13 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>thymeleaf sample</title>
+</head>
+<body>
+<tr th:each="user:${userList}">
+    <td th:text="${user.name}"></td>
+
+</tr>
+
+</body>
+</html>
