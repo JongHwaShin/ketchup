@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter @Setter
 public class UserEntity {
 
-    private Integer id;
+    private String id;
 
     private String name;
 }

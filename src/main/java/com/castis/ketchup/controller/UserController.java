@@ -25,7 +25,7 @@ public class UserController {
 
         List<UserEntity> allUser = userService.getAllUser();
 
-        allUser.forEach(user -> System.out.println("user = " + user.getName()));
+        allUser.forEach(user -> System.out.println("user = " + user.getName() + " "+ user.getId()));
         logger.info("DB Connect Success!!!");
 
         model.addAttribute("userList",allUser);
