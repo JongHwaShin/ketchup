@@ -33,7 +33,7 @@ public class SplashController {
            String tmp_Version = splashService.getVersionCheck(os_type);
            Boolean test = false;
 
-           String resStr =  String.format("{\"res_version\" : \"%s\"}",test);
+           String resStr =  String.format("{\"res_version\" : %b}",test);
            JSONParser parser = new JSONParser();
            JSONObject jsonObject = (JSONObject) parser.parse(resStr);
 
