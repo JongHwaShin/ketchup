@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.castis.ketchup.repository.UserRepository">
-    <select id="getAllUsers" resultType="UserEntity">
+    <select id="getAllUsers" resultType="User">
         SELECT F_OS_TYPE as id, F_OS_VERSION as name FROM T_APP_MANAGEMENT WHERE F_OS_TYPE = 'AOS'
     </select>
 

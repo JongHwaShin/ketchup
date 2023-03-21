@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.castis.ketchup.repository.ProductRepository">
+<!--    <select id="getTop5Product" resultType="Product">-->
+<!--    SELECT -->
+<!--    </select>-->
+    <select id="getProductList" resultType="hashmap">
+        SELECT * FROM T_PRODUCT;
+    </select>
+    <select id="getTop5Product" resultType="hashmap">
+        SELECT *
+        FROM
+            (
+                SELECT F_PRODCUT_ID
+                FROM T_PRODUCT_LIKE tpl
+                GROUP BY F_PRODCUT_ID
+                ORDER BY count(F_PRODCUT_ID )DESC LIMIT 5
+            )A
+                LEFT OUTER JOIN
+            (
+                SELECT F_PRODUCT_ID , *
+                FROM T_PRODUCT tp
+            )B
+            ON A.F_PRODCUT_ID = B.F_PRODUCT_ID;
+    </select>
+    <insert id="setProductInterest">
+        INSERT INTO T_PRODUCT_LIKE
+            (F_PRODCUT_ID, F_USER)
+        VALUES(#{product_id}, #{user_id});
+
+    </insert>
+
+</mapper>

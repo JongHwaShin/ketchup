@@ -1,6 +1,6 @@
 package com.castis.ketchup.controller;
 
-import com.castis.ketchup.entity.UserEntity;
+import com.castis.ketchup.entity.User;
 import com.castis.ketchup.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class UserController {
     @RequestMapping(value = "/getUsers")
     public String index(Model model){
 
-        List<UserEntity> allUser = userService.getAllUser();
+        List<User> allUser = userService.getAllUser();
 
         allUser.forEach(user -> System.out.println("user = " + user.getName() + " "+ user.getId()));
         logger.info("DB Connect Success!!!");
