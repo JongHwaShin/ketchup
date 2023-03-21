@@ -5,6 +5,8 @@ import com.castis.ketchup.entity.Response;
 import com.castis.ketchup.entity.product.Product;
 import com.castis.ketchup.global.error.StatusCode;
 import com.castis.ketchup.service.ProductService;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +37,10 @@ public class ProductController {
             List<Product> productList = productService.getProductList();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application","json", StandardCharsets.UTF_8));
+            JSONObject resObject = new JSONObject();
+            resObject.put("result",productList);
 
-        return new Response(StatusCode.OK,"성공",productList.toString());
+        return new Response(StatusCode.OK,"성공",resObject);
 
 
     }
@@ -48,10 +52,12 @@ public class ProductController {
             List<ProductDTO> top5Product = productService.getTop5Product();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(new MediaType("application","json", StandardCharsets.UTF_8));
-            result =  new Response(StatusCode.OK,"성공",top5Product.toString());
+            JSONObject resObject = new JSONObject();
+            resObject.put("result",top5Product);
+            result =  new Response(StatusCode.OK,"성공",resObject);
         }catch (Exception e){
             logger.error(String.valueOf(e));
-            result = new Response(StatusCode.INTERNAL_SERVER_ERROR,"에러입니다");
+            result = new Response(StatusCode.INTERNAL_SERVER_ERROR,"에러");
             return result;
         }
         return result;
@@ -70,7 +76,7 @@ public class ProductController {
             result = new Response(StatusCode.OK,"성공");
         }catch (Exception e){
             logger.error(e.toString());
-            result = new Response(StatusCode.INTERNAL_SERVER_ERROR,"에러입니다");
+            result = new Response(StatusCode.INTERNAL_SERVER_ERROR,"에러");
             return result;
         }
         return result;
