@@ -10,10 +10,14 @@ import java.util.List;
 @Mapper
 public interface ProductRepository {
 
-    List<Product> getProductList();
+    List<ProductDTO> getProductList(String location,String category, String price, String search, String page);
     List<ProductDTO> getTop5Product();
 
     void setProductInterest(String product_id, String user_id);
+
+    void addProduct(Product product);
+
+    Product findProductByProductId(String product_id);
 
 
 }

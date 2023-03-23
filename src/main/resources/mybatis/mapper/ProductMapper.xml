@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.castis.ketchup.repository.ProductRepository">
-<!--    <select id="getTop5Product" resultType="Product">-->
-<!--    SELECT -->
-<!--    </select>-->
-    <select id="getProductList" resultType="hashmap">
-        SELECT * FROM T_PRODUCT;
+    <select id="getProductList" resultType="hashmap" parameterType="String">
+        SELECT F_PRODUCT_ID as product_id,
+               F_LOCATION_ID as location_id,
+               F_CATEGORY_ID as category_id,
+               F_TITLE as title,
+               F_CONTENTS as contents,
+               F_PRICE as price,
+               F_PHOTO_1 as photo,
+               F_PHOTO_PATH_1 as photo_path,
+               F_REG_USER as reg_user,
+               F_REG_DATE as reg_date
+               FROM T_PRODUCT
+               WHERE 1=1
+               <if test="location != null">
+                   and F_LOCATION_ID = #{location}
+               </if>
+               <if test="category != null">
+                   and F_CATEGORY_ID = #{category}
+               </if>
+                <if test="price != null">
+                    and F_PRICE = #{price}
+                </if>
+                <if test="search != null">
+                    and F_TITLE = #{search}
+                </if>
+
+
+
     </select>
     <select id="getTop5Product" resultType="hashmap">
-        SELECT *
+        SELECT F_PRODUCT_ID as product_id,
+               F_LOCATION_ID as location_id,
+               F_CATEGORY_ID as category_id,
+               F_TITLE as title,
+               F_CONTENTS as contents,
+               F_PRICE as price,
+               F_PHOTO_1 as photo,
+               F_PHOTO_PATH_1 as photo_path,
+               F_REG_USER as reg_user,
+               F_REG_DATE as reg_date
         FROM
             (
                 SELECT F_PRODCUT_ID
@@ -29,5 +61,36 @@
         VALUES(#{product_id}, #{user_id});
 
     </insert>
+    <insert id="addProduct" parameterType="Product">
+        INSERT INTO T_PRODUCT
+            (F_PRODUCT_ID, F_LOCATION_ID, F_CATEGORY_ID, F_TITLE, F_CONTENTS, F_PRICE, F_PHOTO_1, F_PHOTO_PATH_1,F_REG_USER, F_REG_DATE, F_GET_USER, F_GET_DATE, F_PRODUCT_YN, F_PRODUCT_DEL_YN)
+        VALUES (#{product_id},#{location_id},#{category_id},#{title},#{contents},#{price},#{photo},#{photo_path},#{reg_user},#{reg_date},#{get_user},#{get_date},#{product_YN},#{product_del_YN})
+    </insert>
+
+<!--    <update id="updateProduct">-->
+<!--        UPDATE T_PRODUCT-->
+<!--    </update>-->
+    <select id="getOneProduct" parameterType="String">
+        SELECT F_PRODUCT_ID as product_id,
+               F_LOCATION_ID as location_id,
+               F_CATEGORY_ID as category_id,
+               F_TITLE as title,
+               F_CONTENTS as contents,
+               F_PRICE as price,
+               F_PHOTO_1 as photo,
+               F_PHOTO_PATH_1 as photo_path,
+               F_REG_USER as reg_user,
+               F_REG_DATE as reg_date
+        FROM T_PRODUCT
+        WHERE F_PRODUCT_ID = #{product_id}
+    </select>
+
+    <select id="findProductByProductId" parameterType="String" resultType="Product">
+        SELECT *
+        FROM T_PRODUCT
+        WHERE F_PRODUCT_ID = #{product_id}
+    </select>
+
+
 
 </mapper>

@@ -1,8 +1,10 @@
 package com.castis.ketchup.entity.product;
 
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class Product {
     //상품 코드
     private String product_id;
