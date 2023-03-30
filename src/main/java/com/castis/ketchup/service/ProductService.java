@@ -1,9 +1,12 @@
 package com.castis.ketchup.service;
 
+import com.castis.ketchup.controller.ProductController;
 import com.castis.ketchup.dto.ProductDTO;
 import com.castis.ketchup.entity.Response;
 import com.castis.ketchup.entity.product.Product;
 import com.castis.ketchup.repository.ProductRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +17,10 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+    private Logger logger = LoggerFactory.getLogger(ProductService.class);
 
     public List<ProductDTO> getProductList(String location, String category, String price, String search, String page) {
+
         return productRepository.getProductList(location, category, price, search,page);
     }
 
@@ -47,5 +52,14 @@ public class ProductService {
                 .build();
         productRepository.addProduct(addProduct);
 
+    }
+    public void editProduct(String product_id, String location_id){
+        Product no_fix_product = productRepository.findProductByProductId(product_id);
+        productRepository.editProduct(no_fix_product.getProduct_id(),location_id);
+
+    }
+
+    public void deleteProduct(String product_id){
+        productRepository.deleteProduct(product_id);
     }
 }

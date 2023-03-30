@@ -3,6 +3,7 @@ package com.castis.ketchup.repository;
 import com.castis.ketchup.dto.ProductDTO;
 import com.castis.ketchup.entity.User;
 import com.castis.ketchup.entity.product.Product;
+import com.castis.ketchup.entity.product.Product_Like;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -18,6 +19,10 @@ public interface ProductRepository {
     void addProduct(Product product);
 
     Product findProductByProductId(String product_id);
+
+    void editProduct(String product_id,String location_id);
+
+    void deleteProduct(String product_id);
 
 
 }

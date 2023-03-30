@@ -91,6 +91,18 @@
         WHERE F_PRODUCT_ID = #{product_id}
     </select>
 
+    <update id="editProduct" parameterType="hashmap">
+        UPDATE T_PRODUCT
+        SET F_LOCATION_ID = #{location_id}
+        WHERE F_PRODUCT_ID = #{product_id}
+    </update>
+
+    <delete id="deleteProduct" parameterType="String">
+        DELETE FROM T_PRODUCT
+        WHERE F_PRODUCT_ID = #{product_id}
+    </delete>
+
+
 
 
 </mapper>
