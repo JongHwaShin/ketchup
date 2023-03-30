@@ -21,7 +21,7 @@ public class ProductService {
 
     public List<ProductDTO> getProductList(String location, String category, String price, String search, String page) {
 
-        return productRepository.getProductList(location, category, price, search,page);
+        return productRepository.getProductList(location,category,price,search,page);
     }
 
     public List<ProductDTO> getTop5Product() {

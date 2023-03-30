@@ -36,7 +36,7 @@ public class ProductController {
             @RequestParam(name = "location", required = false) String location,
             @RequestParam(name = "category", required = false) String category,
             @RequestParam(name = "price", required = false) String price,
-            @RequestParam(name = "serach", required = false) String search,
+            @RequestParam(name = "search", required = false) String search,
             @RequestParam(name = "page", required = false) String page,
             @PathVariable("APP_TYPE") String app_type) {
 
